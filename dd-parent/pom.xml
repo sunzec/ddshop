@@ -313,7 +313,7 @@
                 <artifactId>zkclient</artifactId>
                 <version>${zkclient.version}</version>
             </dependency>
-            <!-- 消息队列相关 -->
+           <!-- 消息队列相关 -->
             <dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-all</artifactId>
