@@ -18,17 +18,14 @@ public class ItemAction {
     private ItemService itemService;
 
     @ResponseBody
-    @RequestMapping(value="/item/{itemId}",method = RequestMethod.GET)
-    public TbItem getById(@PathVariable("itemId") Long itemId)
-    {
+    @RequestMapping(value = "/item/{itemId}", method = RequestMethod.GET)
+    public TbItem getById(@PathVariable("itemId") Long itemId) {
         System.out.println(itemId);
 
         TbItem tbItem = itemService.getById(itemId);
 
-        return  tbItem;
+        return tbItem;
     }
-
-
 
 
 }
