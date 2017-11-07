@@ -13,6 +13,7 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!--pojo层的接口依赖-->
         <dependency>
             <groupId>com.szw.ddshop</groupId>
             <artifactId>dd-manager-pojo</artifactId>

@@ -14,8 +14,7 @@ public class ItemServiceImpl implements ItemService{
     @Autowired
     private TbItemMapper itemDao;
 
-    @AutoWired
-    private TbItemMapper1 itemDao1;
+
 
     @Override
     public TbItem getById(Long id) {
@@ -26,10 +25,5 @@ public class ItemServiceImpl implements ItemService{
 
     }
 
-    @Override
-    public List<TbItem> getAllItems() {
 
-
-        return itemDao1.selectByExample();
-    }
 }

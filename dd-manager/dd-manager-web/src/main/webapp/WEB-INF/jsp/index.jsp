@@ -65,9 +65,9 @@
 
 <script>
 
-    //    ddshop.registerMenuEvent();
+        ddshop.registerMenuEvent();
 
-    $(function () {
+    /*$(function () {
         //约定大于配置：jquery对象前面加上$,如果是DOM对象不需要加$
         var $tree = $('#menu .easyui-tree');
         //将当前树打印到控制台
@@ -94,7 +94,7 @@
             }
         });
     });
-
+*/
 
 </script>
 
