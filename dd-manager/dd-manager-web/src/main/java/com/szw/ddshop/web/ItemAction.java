@@ -1,7 +1,11 @@
 package com.szw.ddshop.web;
 
+import com.szw.ddshop.common.dto.Page;
+import com.szw.ddshop.common.dto.Result;
 import com.szw.ddshop.pojo.po.TbItem;
+import com.szw.ddshop.pojo.vo.TbItemCustom;
 import com.szw.ddshop.service.ItemService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.logging.Logger;
 
 @Controller
 @Scope("prototype")
@@ -32,7 +35,46 @@ public class ItemAction {
         return tbItem;
     }
 
+    /*@ResponseBody
+    @RequestMapping("/items")
+    public List<TbItem> getAllItems()
+    {
+        List<TbItem> list = null;
 
+        try {
+             list = itemService.getItems();
+        }
+        catch (Exception e)
+        {
+              logger.error(e.getMessage(), e);
+              e.printStackTrace();
+        }
 
+        return list;
+
+    }*/
+
+    /**
+     * 商品信息分页查询
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/items")
+    public Result<TbItemCustom> listItemsByPage(Page page) {
+
+        Result<TbItemCustom> list = null;
+
+        try {
+            list= itemService.listItemsByPage(page);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+
+        return list;
+
+    }
 
 }

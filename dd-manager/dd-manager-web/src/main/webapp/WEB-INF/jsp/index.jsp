@@ -19,7 +19,7 @@
     <h2>天天小商城后台管理系统</h2>
 </div>
 
-<div data-options="region:'south'" style="padding:20px;background:#eee;">
+<div data-options="region:'south'" style="padding:5px;background:#eee;">
     系统版本：V2.0
 </div>
 

@@ -29,6 +29,8 @@
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
         <!--自动扫描dao里面的所有的Mapper.xml-->
         <property name="mapperLocations" value="classpath*:com/szw/ddshop/dao/*Mapper.xml"/>
+        <!--别名-->
+        <property name="typeAliasesPackage" value="com.szw.ddshop.pojo.*"/>
     </bean>
 
     <!--4 配置扫描DAO层接口，配置了这个类之后就不需要再对接口进行实现(不需要再写接口的实现类)-->
@@ -37,9 +39,13 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!--DAO层所在的包-->
         <property name="basePackage" value="com.szw.ddshop.dao"/>
+
+
     </bean>
 
     <!--5 扫描DAO层下注解类,可以扫描到base-package的当前包以及子包的所有注解类-->
     <context:component-scan base-package="com.szw.ddshop.dao"/>
+
+
 
 </beans>
