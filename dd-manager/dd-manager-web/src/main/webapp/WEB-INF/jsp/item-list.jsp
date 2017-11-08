@@ -35,6 +35,27 @@
                      $.messager.alert('提示','至少选中一条记录');
                      return;
                  }
+                 $.messager.confirm('确认','确认删除?',function(r){
+                     if(r)
+                     {
+                         var ids = [];
+                         //遍历
+                         for(var i  in  selections)
+                         {
+                             ids.push(selections[i].id);
+                         }
+                         $.post(
+                             "items/batch",
+                             { 'ids[]': ids},
+                             function (data) {
+
+                             },
+                             'json'
+                         );
+                     }
+
+                 })
+
              }
          },
          {
