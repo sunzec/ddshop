@@ -64,39 +64,7 @@
 <script src="js/common.js"></script>
 
 <script>
-
         ddshop.registerMenuEvent();
-
-    /*$(function () {
-        //约定大于配置：jquery对象前面加上$,如果是DOM对象不需要加$
-        var $tree = $('#menu .easyui-tree');
-        //将当前树打印到控制台
-        //console.log($tree);
-        $tree.tree({
-            onClick: function (node) {
-                var href = node.attributes.href;//item-add
-                var text = node.text;
-//                debugger;
-                $('#tab').tabs('close', 1);
-                $('#tab').tabs('add', {
-                    title: text,
-                    href: href,
-                    closable: true,
-                    tools: [{
-                        iconCls: 'icon-mini-refresh',
-                        handler: function () {
-                            alert('刷新');
-                        }
-                    }]
-
-                });
-
-            }
-        });
-    });
-*/
-
 </script>
-
 </body>
 </html>

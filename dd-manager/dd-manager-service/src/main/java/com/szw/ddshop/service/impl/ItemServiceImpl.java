@@ -82,7 +82,6 @@ public class ItemServiceImpl implements ItemService {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
-
         return result;
     }
 
