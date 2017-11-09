@@ -18,6 +18,7 @@
 
      SELECT  COUNT(1)
      FROM  tb_item
+     where status != 3
 
   </select>
 
@@ -28,6 +29,7 @@
         FROM tb_item i
         left JOIN tb_item_cat c
          on i.cid = c.id
+        where i.status != 3
         ORDER BY i.id DESC
         limit #{offset},#{rows}
 

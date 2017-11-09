@@ -86,31 +86,84 @@ public class ItemServiceImpl implements ItemService {
         return result;
     }
 
-
-
     /**
-     * 批量删除
+     * 执行更新
+     * @param ids
+     * @return
      */
     @Override
-    public int updateItems(List<Long> ids) {
+    public int updateBatch(List<Long> ids) {
+
         int i = 0;
         try {
-            //准备商品对象，这个对象包含了状态为3的字段
+            //准备一个商品对象包含了状态为3的字段
             TbItem record = new TbItem();
             record.setStatus((byte) 3);
-            //创建更新模板 update tb_item set status=? where id in (?,?,?)
+            //创建更新模板
             TbItemExample example = new TbItemExample();
             TbItemExample.Criteria criteria = example.createCriteria();
             criteria.andIdIn(ids);
-            //执行更新
-            i = itemDao.updateByExampleSelective(record, example);
+            //执行更新操作
+            itemDao.updateByExampleSelective(record, example);
+
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
-        return 0;
+        return i;
     }
 
+
+    @Override
+    /**
+     * 上架
+     */
+    public int updateStatusUp(List<Long> ids) {
+
+        int i = 0;
+        try {
+            //准备一个商品对象包含了状态为3的字段
+            TbItem record = new TbItem();
+            record.setStatus((byte) 1);
+            //创建更新模板
+            TbItemExample example = new TbItemExample();
+            TbItemExample.Criteria criteria = example.createCriteria();
+            criteria.andIdIn(ids);
+            //执行更新操作
+            itemDao.updateByExampleSelective(record, example);
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    /**
+     * 下架
+     * @param ids
+     * @return
+     */
+    @Override
+    public int updateStatusDown(List<Long> ids) {
+        int i = 0;
+        try {
+            //准备一个商品对象包含了状态为3的字段
+            TbItem record = new TbItem();
+            record.setStatus((byte) 2);
+            //创建更新模板
+            TbItemExample example = new TbItemExample();
+            TbItemExample.Criteria criteria = example.createCriteria();
+            criteria.andIdIn(ids);
+            //执行更新操作
+            itemDao.updateByExampleSelective(record, example);
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
 
 
 }

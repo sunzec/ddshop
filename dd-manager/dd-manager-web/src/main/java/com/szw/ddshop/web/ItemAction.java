@@ -79,23 +79,61 @@ public class ItemAction {
     /**
      * 批量删除
      */
+
     @ResponseBody
-    @RequestMapping("/items/batch")
-    public int updateItems(@RequestParam("ids[]")List<Long> ids)
+    @RequestMapping(value ="/items/batch", method = RequestMethod.POST)
+     public int updateBatch(@RequestParam("ids[]") List<Long> ids)
     {
-        int i = 0;
+        int i=0;
         try {
-            i= itemService.updateItems(ids);
+            i=itemService.updateBatch(ids);
         }
         catch (Exception e)
         {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
-
-
         return i;
+    }
 
+    /**
+     * 上架
+     */
+
+    @ResponseBody
+    @RequestMapping(value ="/items/up", method = RequestMethod.POST)
+    public int updateStatusUp(@RequestParam("ids[]") List<Long> ids)
+    {
+        int i=0;
+        try {
+            i=itemService.updateStatusUp(ids);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    /**
+     * 下架
+     */
+
+    @ResponseBody
+    @RequestMapping(value ="/items/down", method = RequestMethod.POST)
+    public int updateStatusDown(@RequestParam("ids[]") List<Long> ids)
+    {
+        int i=0;
+        try {
+            i=itemService.updateStatusDown(ids);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
     }
 
 }

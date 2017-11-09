@@ -45,11 +45,15 @@
                              ids.push(selections[i].id);
                          }
                          $.post(
+                             //url:"'
                              "items/batch",
+                             //data:从前台提交哪些数据到后台。相当于data:Object
                              { 'ids[]': ids},
+                             //后台处理成功的回调函数
                              function (data) {
-
+                                 $('#dg').datagrid('reload')
                              },
+                             //dataType:返回数据类型
                              'json'
                          );
                      }
@@ -69,14 +73,78 @@
              iconCls:'icon-up',
              text:'上架',
              handler:function(){
-                 console.log('上架')
+                 //选择是否已经上架
+                 var selections = $('#dg').datagrid('getSelections');
+                 console.log(selections);
+                 //判断选择的记录是否为空
+                 if(selections.length == 0)
+                 {
+                     $.messager.alert('提示','至少选中一条记录');
+                     return;
+                 }
+                 $.messager.confirm('确认','确认上架?',function(r){
+                     if(r)
+                     {
+                         var ids = [];
+                         //遍历
+                         for(var i  in  selections)
+                         {
+                             ids.push(selections[i].id);
+                         }
+                         $.post(
+                             //url:"'
+                             "items/up",
+                             //data:从前台提交哪些数据到后台。相当于data:Object
+                             { 'ids[]': ids},
+                             //后台处理成功的回调函数
+                             function (data) {
+                                 $('#dg').datagrid('reload')
+                             },
+                             //dataType:返回数据类型
+                             'json'
+                         );
+                     }
+
+                 })
              }
          },
          {
              iconCls:'icon-down',
              text:'下架',
              handler:function(){
-                 console.log('下架')
+                 //选择是否已经上架
+                 var selections = $('#dg').datagrid('getSelections');
+                 console.log(selections);
+                 //判断选择的记录是否为空
+                 if(selections.length == 0)
+                 {
+                     $.messager.alert('提示','至少选中一条记录');
+                     return;
+                 }
+                 $.messager.confirm('确认','确认上架?',function(r){
+                     if(r)
+                     {
+                         var ids = [];
+                         //遍历
+                         for(var i  in  selections)
+                         {
+                             ids.push(selections[i].id);
+                         }
+                         $.post(
+                             //url:"'
+                             "items/down",
+                             //data:从前台提交哪些数据到后台。相当于data:Object
+                             { 'ids[]': ids},
+                             //后台处理成功的回调函数
+                             function (data) {
+                                 $('#dg').datagrid('reload')
+                             },
+                             //dataType:返回数据类型
+                             'json'
+                         );
+                     }
+
+                 })
              }
          }
      ];
