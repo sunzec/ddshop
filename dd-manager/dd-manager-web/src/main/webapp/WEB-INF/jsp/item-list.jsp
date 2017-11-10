@@ -171,7 +171,7 @@
             {field:'id',title9:'编号',width:100},
             {field:'title',title:'名称',width:100},
             {field:'sellPoint',title:'卖点',width:100},
-            {field:'catName',title:'商品分类',width:100},
+            {field:'catName',title:'商品分类(后台)',width:100},
             {field:'status',title:'商品状态(前台)',formatter:function (value,row,index) {
                 console.group();
                 console.log(value);
@@ -196,7 +196,17 @@
 
             }},
             {field:'statusName',title:'状态名',width:100},
-            {field:'price',title:'价格',width:100,align:'right'}
+            {field:'price',title:'价格',width:100,align:'right'},
+            {field:'created',title:'创建时间',width:100,align:'right',formatter:function(value,row,index){
+
+                return moment(value).format("LL");
+
+            }},
+            {field:'updated',title:'更新时间',width:100,align:'right',formatter:function (value,row,index) {
+
+                return moment(value).format("LL")
+
+            }}
         ]]
     });
 </script>
