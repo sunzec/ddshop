@@ -19,7 +19,7 @@
     <h2>天天小商城后台管理系统</h2>
 </div>
 
-<div data-options="region:'south'" style="padding:5px;background:#eee;">
+<div data-options="region:'south'" style="padding:2px;background:#eee;">
     系统版本：V2.0
 </div>
 
@@ -49,7 +49,7 @@
 
 <div data-options="region:'center'" style="background:#eee;">
     <div id="tab" class="easyui-tabs" data-options="fit:true">
-        <div title="欢迎页面" style="padding:20px;">LOL欢迎你</div>
+        <div title="欢迎页面" style="padding:20px;">Hello</div>
     </div>
 </div>
 
@@ -59,7 +59,10 @@
 <!-- jquery easyui -->
 <script src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <%--语言包--%>
+<script src="js/ueditor/ueditor.config.js"></script>
+<script src="js/ueditor/ueditor.all.js"></script>
 <script src="js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+
 <%--引入日期处理库--%>
 <script src="js/moment/moment-with-locales.js"></script>
 <script>

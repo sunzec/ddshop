@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szw.ddshop.dao.TbItemParamCustomerMapper" >
+
+  <sql id="Base_Column_List" >
+    p.id, p.item_cat_id as itemCatId, p.created, p.updated ,
+    c.name  as itemCatName
+
+  </sql>
+  <sql id="Blob_Column_List" >
+     p.param_data as paramData
+  </sql>
+
+
+  <select id="countItemParams" resultType="_int">
+
+    SELECT  COUNT(1)
+    FROM  tb_item_param p
+  </select>
+
+
+  <select id="listItemParamByPage"  resultType="com.szw.ddshop.pojo.vo.TbItemParamCustom" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    from tb_item_param p
+
+    left join  tb_item_cat c on p.item_cat_id =c.id
+
+    <choose>
+      <when test="order != null and order.sort != null and order.order != null">
+
+        <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">
+          p.${item}
+        </foreach>
+
+        <!--<if test="order.sort != 'title'">
+         ORDER BY i.${order.sort} ${order.order}
+        </if>
+       <if test="order.sort == 'title'">
+            ORDER BY  CONVERT(i.${order.sort} using gbk) ${order.order}
+        </if>-->
+
+      </when>
+      <otherwise>
+        ORDER BY p.id DESC
+      </otherwise>
+
+    </choose>
+
+
+    limit #{page.offset},#{page.rows}
+  </select>
+
+</mapper>

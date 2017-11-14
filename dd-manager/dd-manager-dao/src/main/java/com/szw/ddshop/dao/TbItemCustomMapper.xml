@@ -5,7 +5,10 @@
 
     <sql id="Base_Column_List">
     i.id, i.title, i.sell_point as sellPoint,
-    i.price, i.num, i.barcode, i.image, i.cid, i.status, i.created, i.updated,
+    i.price,
+    FORMAT(i.price/100,2) as changedPrice,
+     i.num, i.barcode, i.image, i.cid, i.status,i.created,i.updated,
+    DATE_FORMAT(i.created,'%Y-%m-%d') as createdDateString , DATE_FORMAT(i.updated,'%Y-%m-%d') as  updatedDateString ,
     c.name as catName,
     CASE  i.status
             WHEN 1 THEN  "正常"
@@ -14,24 +17,55 @@
             ELSE  "未知" END  as statusName
   </sql>
 
+    <sql id="Where_Clause">
+        <where>
+            i.status != 3
+            <if test="query != null and query.title != null and query.title != ''">
+                and i.title like '%${query.title}%'
+            </if>
+            <if test="query != null and query.status != null and query.status != 0">
+                and i.status = #{query.status}
+            </if>
+        </where>
+    </sql>
+
     <select id="countItems" resultType="_int">
 
      SELECT  COUNT(1)
-     FROM  tb_item
-     where status != 3
+     FROM  tb_item i
+    <include refid="Where_Clause"/>
 
   </select>
 
-    <select id="listItemsByPage" parameterType="com.szw.ddshop.common.dto.Page"
-            resultType="com.szw.ddshop.pojo.vo.TbItemCustom">
+    <select id="listItemsByPage"  resultType="com.szw.ddshop.pojo.vo.TbItemCustom">
         select
         <include refid="Base_Column_List"/>
         FROM tb_item i
         left JOIN tb_item_cat c
          on i.cid = c.id
-        where i.status != 3
-        ORDER BY i.id DESC
-        limit #{offset},#{rows}
+        <include refid="Where_Clause"/>
+        <choose>
+            <when test="order != null and order.sort != null and order.order != null">
+
+                <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">
+                    i.${item}
+                </foreach>
+
+                <!--<if test="order.sort != 'title'">
+                 ORDER BY i.${order.sort} ${order.order}
+                </if>
+               <if test="order.sort == 'title'">
+                    ORDER BY  CONVERT(i.${order.sort} using gbk) ${order.order}
+                </if>-->
+
+            </when>
+            <otherwise>
+                ORDER BY i.id DESC
+            </otherwise>
+
+        </choose>
+
+        limit #{page.offset},#{page.rows}
 
     </select>
 

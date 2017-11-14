@@ -1,9 +1,13 @@
 package com.szw.ddshop.web;
 
+import com.szw.ddshop.common.dto.Order;
 import com.szw.ddshop.common.dto.Page;
 import com.szw.ddshop.common.dto.Result;
 import com.szw.ddshop.pojo.po.TbItem;
+import com.szw.ddshop.pojo.po.TbItemParam;
 import com.szw.ddshop.pojo.vo.TbItemCustom;
+import com.szw.ddshop.pojo.vo.TbItemQuery;
+import com.szw.ddshop.service.ItemParamService;
 import com.szw.ddshop.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +26,9 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private ItemParamService itemParamService;
+
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     @ResponseBody
@@ -34,37 +41,18 @@ public class ItemAction {
         return tbItem;
     }
 
-    /*@ResponseBody
-    @RequestMapping("/items")
-    public List<TbItem> getAllItems()
-    {
-        List<TbItem> list = null;
-
-        try {
-             list = itemService.getItems();
-        }
-        catch (Exception e)
-        {
-              logger.error(e.getMessage(), e);
-              e.printStackTrace();
-        }
-
-        return list;
-
-    }*/
-
     /**
      * 商品信息分页查询
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/items")
-    public Result<TbItemCustom> listItemsByPage(Page page) {
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order, TbItemQuery query) {
 
         Result<TbItemCustom> list = null;
 
         try {
-            list= itemService.listItemsByPage(page);
+            list= itemService.listItemsByPage(page,order,query);
         }
         catch (Exception e)
         {
@@ -79,7 +67,6 @@ public class ItemAction {
     /**
      * 批量删除
      */
-
     @ResponseBody
     @RequestMapping(value ="/items/batch", method = RequestMethod.POST)
      public int updateBatch(@RequestParam("ids[]") List<Long> ids)
@@ -134,6 +121,41 @@ public class ItemAction {
             e.printStackTrace();
         }
         return i;
+    }
+
+    //Todo
+    @ResponseBody
+    @RequestMapping(value="/item")
+    public int saveItem(TbItem tbItem,String content,String  paramData)
+    {
+        int i = 0;
+        try {
+        i=itemService.saveItem(tbItem,content,paramData);
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+
+        }
+        return i;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/itemParam/query/{cid}",method = RequestMethod.GET)
+    public TbItemParam getItemParamByCid(@PathVariable("cid") Long cid)
+    {
+        TbItemParam  tbItemParam = null;
+        try {
+            tbItemParam = itemParamService.getItemParamByCid(cid);
+        }catch (Exception e)
+        {
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+
+        }
+        return tbItemParam;
+
+
     }
 
 }

@@ -11,8 +11,35 @@ import com.szw.ddshop.pojo.po.TbItem;
 public class TbItemCustom extends TbItem {
 
     private String catName;
-
     private String statusName;
+    private String createdDateString;
+    private String updatedDateString;
+    //创建单位为元的price对象属性changedPrice
+    private Long  changedPrice;
+
+    public Long getChangedPrice() {
+        return changedPrice;
+    }
+
+    public void setChangedPrice(Long changedPrice) {
+        this.changedPrice = changedPrice;
+    }
+
+    public String getCreatedDateString() {
+        return createdDateString;
+    }
+
+    public void setCreatedDateString(String createdDateString) {
+        this.createdDateString = createdDateString;
+    }
+
+    public String getUpdatedDateString() {
+        return updatedDateString;
+    }
+
+    public void setUpdatedDateString(String updatedDateString) {
+        this.updatedDateString = updatedDateString;
+    }
 
     public String getStatusName() {
         return statusName;
